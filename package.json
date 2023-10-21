@@ -1,0 +1,28 @@
+{
+  "name": "yumestories",
+  "version": "1.0.0",
+  "description": "A simple story telling app using AI",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benaor/yumestories.git"
+  },
+  "author": "benaor",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "validate-branch-name": "^1.3.0"
+  },
+  "validate-branch-name": {
+    "patterns": [
+      "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\([a-zA-Z0-9_-]+\\))?:[a-zA-Z0-9_-]+$"
+    ],
+    "patternError": "Your branch name must be in the format of type/scope: description - Read conventionnal commit convention if you need help"
+  }
+}
