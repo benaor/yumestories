@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "A simple story telling app using AI",
   "private": true,
-  "main": "index.js",
   "scripts": {
     "prepare": "husky install",
     "validate-branch-name": "validate-branch-name",
-    "test": "echo \"Error: no test specified\" "
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
