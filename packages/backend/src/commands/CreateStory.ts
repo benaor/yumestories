@@ -1,7 +1,15 @@
-import { Story } from "../domain/entities/Story";
+import { CatalogRepository } from "../domain/gateways/CatalogRepository";
+import { StoryTextGenerator } from "../domain/gateways/StoryTextGenerator";
 
 export class CreateStoryCommand {
-  execute(): Story {
-    return { id: 1, textStory: "Once upon a time ..." };
+  constructor(
+    private catalogRepo: CatalogRepository,
+    private storyGenerator: StoryTextGenerator,
+  ) {}
+
+  async execute(): Promise<void> {
+    const story = await this.storyGenerator.generate();
+
+    await this.catalogRepo.addStoryInCatalog(story);
   }
 }
