@@ -2,7 +2,7 @@ import { Story } from "../../src/domain/entities/Story";
 import { TextStory } from "../../src/domain/entities/TextStory";
 import { CatalogRepository } from "../../src/domain/gateways/CatalogRepository";
 import { StoryTextGenerator } from "../../src/domain/gateways/StoryTextGenerator";
-import { CreateStoryCommand } from "../../src/commands/CreateStory";
+import { CreateStoryCommand } from "../../src/useCases/commands/CreateStory";
 import { StoryVoiceGenerator } from "../../src/domain/gateways/StoryVoiceGenerator";
 import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
 

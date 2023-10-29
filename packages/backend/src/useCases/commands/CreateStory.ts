@@ -1,8 +1,8 @@
-import { Story } from "../domain/entities/Story";
-import { CatalogRepository } from "../domain/gateways/CatalogRepository";
-import { IdGenerator } from "../domain/gateways/IdGenerator";
-import { StoryTextGenerator } from "../domain/gateways/StoryTextGenerator";
-import { StoryVoiceGenerator } from "../domain/gateways/StoryVoiceGenerator";
+import { Story } from "../../domain/entities/Story";
+import { CatalogRepository } from "../../domain/gateways/CatalogRepository";
+import { IdGenerator } from "../../domain/gateways/IdGenerator";
+import { StoryTextGenerator } from "../../domain/gateways/StoryTextGenerator";
+import { StoryVoiceGenerator } from "../../domain/gateways/StoryVoiceGenerator";
 
 export class CreateStoryCommand {
   constructor(
