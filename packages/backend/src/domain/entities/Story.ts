@@ -1,12 +1,12 @@
 export class Story {
   id: number;
-  textStory: string;
+  text: string;
   title: string;
   audio: string;
 
-  constructor({ id, textStory, title, audio }: Story) {
+  constructor({ id, text, title, audio }: Story) {
     this.id = id;
-    this.textStory = textStory;
+    this.text = text;
     this.title = title;
     this.audio = audio;
   }

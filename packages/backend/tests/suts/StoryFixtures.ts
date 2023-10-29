@@ -3,6 +3,7 @@ import { TextStory } from "../../src/domain/entities/TextStory";
 import { CatalogRepository } from "../../src/domain/gateways/CatalogRepository";
 import { StoryTextGenerator } from "../../src/domain/gateways/StoryTextGenerator";
 import { CreateStoryCommand } from "../../src/commands/CreateStory";
+import { StoryVoiceGenerator } from "../../src/domain/gateways/StoryVoiceGenerator";
 
 export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
@@ -20,9 +21,14 @@ export const CreateStoryCreatorFitures = () => {
     },
   };
 
+  const stubStoryVoiceGenerator: StoryVoiceGenerator = {
+    generate: async () => `http://localhost:3000/audio/${StoryGenerated.id}`,
+  };
+
   const createStoryCommand = new CreateStoryCommand(
     stubCatalogRepository,
     stubStoryGenerator,
+    stubStoryVoiceGenerator,
   );
 
   return {

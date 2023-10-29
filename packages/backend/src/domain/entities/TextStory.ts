@@ -1,11 +1,11 @@
 export class TextStory {
   id: number;
   title: string;
-  textStory: string;
+  text: string;
 
-  constructor({ id, title, textStory }: TextStory) {
+  constructor({ id, title, text }: TextStory) {
     this.id = id;
     this.title = title;
-    this.textStory = textStory;
+    this.text = text;
   }
 }

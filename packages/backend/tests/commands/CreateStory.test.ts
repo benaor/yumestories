@@ -24,6 +24,28 @@ describe("Create Story use Case", () => {
     fixtures.ThenCatalogShouldBe([snowWhiteStory]);
   });
 
+  it("The story should be 'Moby-Dick'", async () => {
+    fixtures.givenTheCatalogOfStoriesIs([]);
+
+    const mobyDickText = StoryTextBuilder()
+      .withId(2)
+      .withTitle("Moby-Dick")
+      .withTextStory("Somewhere in the sea ...")
+      .build();
+
+    const mobyDickStory = StoryBuilder()
+      .withId(2)
+      .withTitle("Moby-Dick")
+      .withTextStory("Somewhere in the sea ...")
+      .withAudio("http://localhost:3000/audio/2")
+      .build();
+
+    fixtures.givenStoryTexthasBeenGenerated(mobyDickText);
+    await fixtures.whenCreateStory();
+
+    fixtures.ThenCatalogShouldBe([mobyDickStory]);
+  });
+
   it("The catalog should contain 2 stories", async () => {
     fixtures.givenTheCatalogOfStoriesIs([]);
 
@@ -37,6 +59,7 @@ describe("Create Story use Case", () => {
       .withId(1)
       .withTitle("Snow White")
       .withTextStory("Snow White, and the seven dwarfs ...")
+      .withAudio("http://localhost:3000/audio/1")
       .build();
 
     fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
@@ -56,6 +79,7 @@ describe("Create Story use Case", () => {
       .withId(2)
       .withTitle("The little red riding hood")
       .withTextStory("A little red riding hood ...")
+      .withAudio("http://localhost:3000/audio/2")
       .build();
 
     fixtures.givenStoryTexthasBeenGenerated(redRidingHoodText);
@@ -63,24 +87,5 @@ describe("Create Story use Case", () => {
     await fixtures.whenCreateStory();
 
     fixtures.ThenCatalogShouldBe([snowWhiteStory, redRidingHoodStory]);
-  });
-
-  it("The story should be 'Moby-Dick'", async () => {
-    fixtures.givenTheCatalogOfStoriesIs([]);
-
-    const mobyDickText = StoryTextBuilder()
-      .withTitle("Moby-Dick")
-      .withTextStory("Somewhere in the sea ...")
-      .build();
-
-    const mobyDickStory = StoryBuilder()
-      .withTitle("Moby-Dick")
-      .withTextStory("Somewhere in the sea ...")
-      .build();
-
-    fixtures.givenStoryTexthasBeenGenerated(mobyDickText);
-    await fixtures.whenCreateStory();
-
-    fixtures.ThenCatalogShouldBe([mobyDickStory]);
   });
 });
