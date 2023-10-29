@@ -1,5 +1,5 @@
 export class Story {
-  id: number;
+  id: string;
   text: string;
   title: string;
   audio: string;

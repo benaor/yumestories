@@ -8,7 +8,7 @@ import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
 
 export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
-  let idGenerated: number = 1;
+  let idGenerated: string = "1";
   let storyGenerated: TextStory;
 
   const stubIdGenerator: IdGenerator = {
@@ -42,7 +42,7 @@ export const CreateStoryCreatorFitures = () => {
     givenTheCatalogOfStoriesIs: (_catalog: Array<Story>) => {
       catalog = _catalog;
     },
-    givenIdIsGenerated: (_id: number) => {
+    givenIdIsGenerated: (_id: string) => {
       idGenerated = _id;
     },
     givenStoryTexthasBeenGenerated: (_story: TextStory) => {
