@@ -4,10 +4,16 @@ import { CatalogRepository } from "../../src/domain/gateways/CatalogRepository";
 import { StoryTextGenerator } from "../../src/domain/gateways/StoryTextGenerator";
 import { CreateStoryCommand } from "../../src/commands/CreateStory";
 import { StoryVoiceGenerator } from "../../src/domain/gateways/StoryVoiceGenerator";
+import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
 
 export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
-  let StoryGenerated: TextStory;
+  let idGenerated: number = 1;
+  let storyGenerated: TextStory;
+
+  const stubIdGenerator: IdGenerator = {
+    generate: () => idGenerated,
+  };
 
   const stubCatalogRepository: CatalogRepository = {
     addStoryInCatalog: async (story: Story) => {
@@ -17,15 +23,16 @@ export const CreateStoryCreatorFitures = () => {
 
   const stubStoryGenerator: StoryTextGenerator = {
     generate: async () => {
-      return StoryGenerated;
+      return storyGenerated;
     },
   };
 
   const stubStoryVoiceGenerator: StoryVoiceGenerator = {
-    generate: async () => `http://localhost:3000/audio/${StoryGenerated.id}`,
+    generate: async () => `http://localhost:3000/audio/${idGenerated}`,
   };
 
   const createStoryCommand = new CreateStoryCommand(
+    stubIdGenerator,
     stubCatalogRepository,
     stubStoryGenerator,
     stubStoryVoiceGenerator,
@@ -35,8 +42,11 @@ export const CreateStoryCreatorFitures = () => {
     givenTheCatalogOfStoriesIs: (_catalog: Array<Story>) => {
       catalog = _catalog;
     },
+    givenIdIsGenerated: (_id: number) => {
+      idGenerated = _id;
+    },
     givenStoryTexthasBeenGenerated: (_story: TextStory) => {
-      StoryGenerated = _story;
+      storyGenerated = _story;
     },
     whenCreateStory: async () => {
       await createStoryCommand.execute();

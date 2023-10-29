@@ -1,15 +1,11 @@
 import { TextStory } from "../../src/domain/entities/TextStory";
 
 export const StoryTextBuilder = ({
-  id = 1,
   title = "Snow White",
   text = "Once upon a time ...",
 }: Partial<TextStory> = {}) => {
-  const props = { id, title, text };
+  const props = { title, text };
   return {
-    withId(_id: typeof id) {
-      return StoryTextBuilder({ ...props, id: _id });
-    },
     withTitle(_title: typeof title) {
       return StoryTextBuilder({ ...props, title: _title });
     },

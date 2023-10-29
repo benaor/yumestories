@@ -28,7 +28,6 @@ describe("Create Story use Case", () => {
     fixtures.givenTheCatalogOfStoriesIs([]);
 
     const mobyDickText = StoryTextBuilder()
-      .withId(2)
       .withTitle("Moby-Dick")
       .withTextStory("Somewhere in the sea ...")
       .build();
@@ -40,7 +39,9 @@ describe("Create Story use Case", () => {
       .withAudio("http://localhost:3000/audio/2")
       .build();
 
+    fixtures.givenIdIsGenerated(2);
     fixtures.givenStoryTexthasBeenGenerated(mobyDickText);
+
     await fixtures.whenCreateStory();
 
     fixtures.ThenCatalogShouldBe([mobyDickStory]);
@@ -51,7 +52,6 @@ describe("Create Story use Case", () => {
 
     // Story 1
     const snowWhiteText = StoryTextBuilder()
-      .withId(1)
       .withTitle("Snow White")
       .withTextStory("Snow White, and the seven dwarfs ...")
       .build();
@@ -62,6 +62,7 @@ describe("Create Story use Case", () => {
       .withAudio("http://localhost:3000/audio/1")
       .build();
 
+    fixtures.givenIdIsGenerated(1);
     fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
 
     await fixtures.whenCreateStory();
@@ -70,7 +71,6 @@ describe("Create Story use Case", () => {
 
     // Story 2
     const redRidingHoodText = StoryTextBuilder()
-      .withId(2)
       .withTitle("The little red riding hood")
       .withTextStory("A little red riding hood ...")
       .build();
@@ -82,6 +82,7 @@ describe("Create Story use Case", () => {
       .withAudio("http://localhost:3000/audio/2")
       .build();
 
+    fixtures.givenIdIsGenerated(2);
     fixtures.givenStoryTexthasBeenGenerated(redRidingHoodText);
 
     await fixtures.whenCreateStory();
