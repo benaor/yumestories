@@ -34,6 +34,10 @@ importers:
         version: 3.0.3
 
   packages/backend:
+    dependencies:
+      uniqid:
+        specifier: ^5.4.0
+        version: 5.4.0
     devDependencies:
       '@jest/globals':
         specifier: ^29.7.0
@@ -41,6 +45,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.6
         version: 29.5.6
+      '@types/uniqid':
+        specifier: ^5.3.3
+        version: 5.3.3
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.8.7)(ts-node@10.9.1)
@@ -871,6 +878,10 @@ packages:
 
   /@types/stack-utils@2.0.2:
     resolution: {integrity: sha512-g7CK9nHdwjK2n0ymT2CW698FuWJRIx+RP6embAzZ2Qi8/ilIrA1Imt2LVSeHUzKvpoi7BhmmQcXz95eS0f2JXw==}
+    dev: true
+
+  /@types/uniqid@5.3.3:
+    resolution: {integrity: sha512-K0ZC3LPd8hy2CC26KfUkXEBmJt4hTQokroqcygADKgsgar8SyYuPOzGehmaRrhMrB/KDZKWzdQyoTqRX7eCuZg==}
     dev: true
 
   /@types/yargs-parser@21.0.2:
@@ -3393,6 +3404,10 @@ packages:
   /undici-types@5.25.3:
     resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
     dev: true
+
+  /uniqid@5.4.0:
+    resolution: {integrity: sha512-38JRbJ4Fj94VmnC7G/J/5n5SC7Ab46OM5iNtSstB/ko3l1b5g7ALt4qzHFgGciFkyiRNtDXtLNb+VsxtMSE77A==}
+    dev: false
 
   /untildify@4.0.0:
     resolution: {integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==}
