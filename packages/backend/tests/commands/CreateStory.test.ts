@@ -14,7 +14,7 @@ describe("Create Story use Case", () => {
 
   it("Should add a 'Hansel et Gretel' in catalog", async () => {
     const snowWhiteText = StoryTextBuilder().build();
-    const snowWhiteStory = StoryBuilder().build();
+    const snowWhiteStory = StoryBuilder().withId("1").build();
 
     fixtures.givenTheCatalogOfStoriesIs([]);
     fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
@@ -56,13 +56,15 @@ describe("Create Story use Case", () => {
       .withTextStory("Snow White, and the seven dwarfs ...")
       .build();
     const snowWhiteStory = StoryBuilder()
-      .withId("1")
+      .withId("550e8400-e29b-41d4-a716-446655440000")
       .withTitle("Snow White")
       .withTextStory("Snow White, and the seven dwarfs ...")
-      .withAudio("http://localhost:3000/audio/1")
+      .withAudio(
+        "http://localhost:3000/audio/550e8400-e29b-41d4-a716-446655440000",
+      )
       .build();
 
-    fixtures.givenIdIsGenerated("1");
+    fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440000");
     fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
 
     await fixtures.whenCreateStory();
@@ -76,13 +78,15 @@ describe("Create Story use Case", () => {
       .build();
 
     const redRidingHoodStory = StoryBuilder()
-      .withId("2")
+      .withId("550e8400-e29b-41d4-a716-446655440001")
       .withTitle("The little red riding hood")
       .withTextStory("A little red riding hood ...")
-      .withAudio("http://localhost:3000/audio/2")
+      .withAudio(
+        "http://localhost:3000/audio/550e8400-e29b-41d4-a716-446655440001",
+      )
       .build();
 
-    fixtures.givenIdIsGenerated("2");
+    fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440001");
     fixtures.givenStoryTexthasBeenGenerated(redRidingHoodText);
 
     await fixtures.whenCreateStory();

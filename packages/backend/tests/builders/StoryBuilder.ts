@@ -1,7 +1,7 @@
 import { Story } from "../../src/domain/entities/Story";
 
 export const StoryBuilder = ({
-  id = "1",
+  id = "550e8400-e29b-41d4-a716-446655440000",
   title = "Snow White",
   text = "Once upon a time ...",
   audio = "http://localhost:3000/audio/1",
