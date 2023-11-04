@@ -2,5 +2,28 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.activeIconPack": "react",
+  "material-icon-theme.files.associations": {
+    "*.test.ts": "test-ts",
+    "*.e2e.ts": "test-ts",
+    "*.integ.ts": "test-ts",
+    "*.jest.config.js": "Jest",
+    "*.jest.config.ts": "Jest",
+    "*.jest.config.json": "Jest"
+  },
+  "material-icon-theme.folders.associations": {
+    "test": "Test",
+    "tests": "Test",
+    "tests/adapters": "Test",
+    "tests/commands": "Test",
+    "test/e2e": "Test",
+    "test/integration": "Test",
+    "test/unit": "Test",
+    "core": "Core",
+    "src": "Src",
+    "node_modules": "Base",
+    "coverage": "Base"
   }
 }
