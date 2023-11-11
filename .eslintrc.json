@@ -19,7 +19,7 @@
     "prettier/prettier": "error",
     "linebreak-style": ["error", "unix"],
     "semi": ["error", "always"],
-    "no-console": "warn",
+    "no-console": ["warn", { "allow": ["info", "error"] }],
     "@typescript-eslint/no-unused-vars": ["warn"],
     "no-unused-vars": "warn"
   }
