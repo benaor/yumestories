@@ -16,4 +16,5 @@ module.exports = {
     "!<rootDir>/tests/**/*.integ.ts",
     "!<rootDir>/tests/**/*.e2e.ts",
   ],
+  setupFiles: ["./tests/config/jest.polyfill.js"],
 };
