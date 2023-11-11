@@ -9,20 +9,6 @@ import "dotenv/config";
 import { PostgreSqlCatalogRepository } from "../../src/adapters/PostgreSqlCatalogRepository";
 import { StoryBuilder } from "../builders/StoryBuilder";
 
-// const addThreeStoriesQuery = `CREATE TABLE stories (
-// -- Insérer la première valeur
-// INSERT INTO stories (id, text, title, audio) VALUES
-// ('a1b2c3d4-e5f6-7890-abcd-ef1234567890', 'Texte de l''histoire 1', 'Titre 1', 'audio1.mp3');
-
-// -- Insérer la deuxième valeur
-// INSERT INTO stories (id, text, title, audio) VALUES
-// ('b2c3d4e5-f6a7-8901-bcde-f1234567890a', 'Texte de l''histoire 2', 'Titre 2', 'audio2.mp3');
-
-// -- Insérer la troisième valeur
-// INSERT INTO stories (id, text, title, audio) VALUES
-// ('c3d4e5f6-a7b8-9012-cdef-1234567890ab', 'Texte de l''histoire 3', 'Titre 3', 'audio3.mp3');
-// `;
-
 const username = "username";
 const password = "password";
 const database = "yumestories";
@@ -57,7 +43,7 @@ describe("PostgreCatalogRepository", () => {
   });
 
   afterEach(async () => {
-    container.stop({ timeout: 15000 });
+    container.stop({ timeout: 20000 });
     return pgClient.end();
   });
 
