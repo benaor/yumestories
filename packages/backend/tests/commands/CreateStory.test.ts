@@ -5,97 +5,123 @@ import {
   StoryCreatorSut,
 } from "../suts/StoryFixtures";
 
-describe("Create Story use Case", () => {
+describe("Feature: Create Story", () => {
   let fixtures: StoryCreatorSut;
 
   beforeEach(() => {
     fixtures = CreateStoryCreatorFitures();
   });
 
-  it("Should add a 'Hansel et Gretel' in catalog", async () => {
-    const snowWhiteText = StoryTextBuilder().build();
-    const snowWhiteStory = StoryBuilder().withId("1").build();
+  describe("Scenario: Create stories and add them in catalog", () => {
+    it("Catalog should contain 'Hansel et Gretel'", async () => {
+      const hanselAndGretelText = StoryTextBuilder()
+        .withTitle("Hansel et Gretel")
+        .withTextStory("Once upon a time")
+        .build();
 
-    fixtures.givenTheCatalogOfStoriesIs([]);
-    fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
-    fixtures.givenAudioHasBeenStockedHere("http://localhost:3000/audio/1");
+      const hanselAndGretelStory = StoryBuilder()
+        .withTitle("Hansel et Gretel")
+        .withTextStory("Once upon a time")
+        .build();
 
-    await fixtures.whenCreateStory();
+      fixtures.givenTheCatalogOfStoriesIs([]);
+      fixtures.givenStoryTexthasBeenGenerated(hanselAndGretelText);
 
-    fixtures.ThenCatalogShouldBe([snowWhiteStory]);
-  });
+      await fixtures.whenCreateStory();
 
-  it("The story should be 'Moby-Dick'", async () => {
-    fixtures.givenTheCatalogOfStoriesIs([]);
+      fixtures.ThenCatalogShouldBe([hanselAndGretelStory]);
+    });
 
-    const mobyDickText = StoryTextBuilder()
-      .withTitle("Moby-Dick")
-      .withTextStory("Somewhere in the sea ...")
-      .build();
+    it("Catalog should contain 'Moby-Dick'", async () => {
+      fixtures.givenTheCatalogOfStoriesIs([]);
 
-    const mobyDickStory = StoryBuilder()
-      .withId("2")
-      .withTitle("Moby-Dick")
-      .withTextStory("Somewhere in the sea ...")
-      .withAudio("http://localhost:3000/audio/2")
-      .build();
+      const mobyDickText = StoryTextBuilder()
+        .withTitle("Moby-Dick")
+        .withTextStory("Somewhere in the sea ...")
+        .build();
 
-    fixtures.givenIdIsGenerated("2");
-    fixtures.givenStoryTexthasBeenGenerated(mobyDickText);
-    fixtures.givenAudioHasBeenStockedHere("http://localhost:3000/audio/2");
+      const mobyDickStory = StoryBuilder()
+        .withId("2")
+        .withTitle("Moby-Dick")
+        .withTextStory("Somewhere in the sea ...")
+        .build();
 
-    await fixtures.whenCreateStory();
+      fixtures.givenIdIsGenerated("2");
+      fixtures.givenStoryTexthasBeenGenerated(mobyDickText);
 
-    fixtures.ThenCatalogShouldBe([mobyDickStory]);
-  });
+      await fixtures.whenCreateStory();
 
-  it("The catalog should contain 2 stories", async () => {
-    fixtures.givenTheCatalogOfStoriesIs([]);
+      fixtures.ThenCatalogShouldBe([mobyDickStory]);
+    });
 
-    // Story 1
-    const snowWhiteText = StoryTextBuilder()
-      .withTitle("Snow White")
-      .withTextStory("Snow White, and the seven dwarfs ...")
-      .build();
-    const snowWhiteStory = StoryBuilder()
-      .withId("550e8400-e29b-41d4-a716-446655440000")
-      .withTitle("Snow White")
-      .withTextStory("Snow White, and the seven dwarfs ...")
-      .withAudio(
-        "http://localhost:3000/audio/550e8400-e29b-41d4-a716-446655440000",
-      )
-      .build();
+    it("Catalog should contain 'Snow white' and 'red riding hood'", async () => {
+      fixtures.givenTheCatalogOfStoriesIs([]);
 
-    fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440000");
-    fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
+      // Story 1
+      const snowWhiteText = StoryTextBuilder()
+        .withTitle("Snow White")
+        .withTextStory("Snow White, and the seven dwarfs ...")
+        .build();
 
-    await fixtures.whenCreateStory();
+      const snowWhiteStory = StoryBuilder()
+        .withId("550e8400-e29b-41d4-a716-446655440000")
+        .withTitle("Snow White")
+        .withTextStory("Snow White, and the seven dwarfs ...")
+        .build();
 
-    fixtures.ThenCatalogShouldBe([snowWhiteStory]);
+      fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440000");
+      fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
 
-    // Story 2
-    const redRidingHoodText = StoryTextBuilder()
-      .withTitle("The little red riding hood")
-      .withTextStory("A little red riding hood ...")
-      .build();
+      await fixtures.whenCreateStory();
 
-    const redRidingHoodStory = StoryBuilder()
-      .withId("550e8400-e29b-41d4-a716-446655440001")
-      .withTitle("The little red riding hood")
-      .withTextStory("A little red riding hood ...")
-      .withAudio(
-        "http://localhost:3000/audio/550e8400-e29b-41d4-a716-446655440001",
-      )
-      .build();
+      fixtures.ThenCatalogShouldBe([snowWhiteStory]);
 
-    fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440001");
-    fixtures.givenStoryTexthasBeenGenerated(redRidingHoodText);
-    fixtures.givenAudioHasBeenStockedHere(
-      "http://localhost:3000/audio/550e8400-e29b-41d4-a716-446655440001",
-    );
+      // Story 2
+      const redRidingHoodText = StoryTextBuilder()
+        .withTitle("The little red riding hood")
+        .withTextStory("A little red riding hood ...")
+        .build();
 
-    await fixtures.whenCreateStory();
+      const redRidingHoodStory = StoryBuilder()
+        .withId("550e8400-e29b-41d4-a716-446655440001")
+        .withTitle("The little red riding hood")
+        .withTextStory("A little red riding hood ...")
+        .build();
 
-    fixtures.ThenCatalogShouldBe([snowWhiteStory, redRidingHoodStory]);
+      fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440001");
+      fixtures.givenStoryTexthasBeenGenerated(redRidingHoodText);
+
+      await fixtures.whenCreateStory();
+
+      fixtures.ThenCatalogShouldBe([snowWhiteStory, redRidingHoodStory]);
+    });
+
+    it("Catalog should contain 'Snow white' with this id", async () => {
+      const uuid = "550e8400-e29b-41d4-a716-446655440100";
+      const snowWhiteText = StoryTextBuilder().build();
+      const snowWhiteStory = StoryBuilder().withId(uuid).build();
+
+      fixtures.givenTheCatalogOfStoriesIs([]);
+      fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
+      fixtures.givenIdIsGenerated(uuid);
+
+      await fixtures.whenCreateStory();
+
+      fixtures.ThenCatalogShouldBe([snowWhiteStory]);
+    });
+
+    it("Catalog should contain 'Snow white' with this audio", async () => {
+      const uuid = "550e8400-e29b-41d4-a716-446655440123";
+      const snowWhiteText = StoryTextBuilder().build();
+      const snowWhiteStory = StoryBuilder().withAudio(`test/${uuid}`).build();
+
+      fixtures.givenTheCatalogOfStoriesIs([]);
+      fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
+      fixtures.givenAudioHasBeenStockedHere(`test/${uuid}`);
+
+      await fixtures.whenCreateStory();
+
+      fixtures.ThenCatalogShouldBe([snowWhiteStory]);
+    });
   });
 });

@@ -4,7 +4,7 @@ export const StoryBuilder = ({
   id = "550e8400-e29b-41d4-a716-446655440000",
   title = "Snow White",
   text = "Once upon a time ...",
-  audio = "http://localhost:3000/audio/1",
+  audio = "",
 }: Partial<Story> = {}) => {
   const props = { id, title, text, audio };
   return {
@@ -21,6 +21,12 @@ export const StoryBuilder = ({
       return StoryBuilder({ ...props, audio: _audio });
     },
     build(): Story {
+      if (!audio) {
+        return StoryBuilder({
+          ...props,
+          audio: `http://localhost:3000/audio/${id}`,
+        }).build();
+      }
       return props;
     },
   };

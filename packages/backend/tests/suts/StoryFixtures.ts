@@ -9,7 +9,7 @@ import { FileAudioRepository } from "../../src/domain/gateways/FileAudioReposito
 
 export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
-  let idGenerated: string = "1";
+  let idGenerated: string = "550e8400-e29b-41d4-a716-446655440000";
   let storyGenerated: TextStory;
   let audioPath: string = `http://localhost:3000/audio/${idGenerated}`;
   const stubIdGenerator: IdGenerator = {
