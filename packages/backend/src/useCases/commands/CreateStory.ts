@@ -17,12 +17,7 @@ export class CreateStoryCommand {
     const { title, text } = await this.storyGenerator.generate();
     const audio = await this.voiceGenerator.generate(text);
 
-    const story = new Story({
-      id,
-      title,
-      text,
-      audio,
-    });
+    const story = new Story({ id, title, text, audio });
 
     await this.catalogRepo.addStoryInCatalog(story);
   }
