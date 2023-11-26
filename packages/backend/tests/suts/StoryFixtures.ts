@@ -5,12 +5,13 @@ import { StoryTextGenerator } from "../../src/domain/gateways/StoryTextGenerator
 import { CreateStoryCommand } from "../../src/useCases/commands/CreateStory";
 import { StoryVoiceGenerator } from "../../src/domain/gateways/StoryVoiceGenerator";
 import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
+import { FileAudioRepository } from "../../src/domain/gateways/FileAudioRepository";
 
 export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
   let idGenerated: string = "1";
   let storyGenerated: TextStory;
-
+  let audioPath: string = `http://localhost:3000/audio/${idGenerated}`;
   const stubIdGenerator: IdGenerator = {
     generate: () => idGenerated,
   };
@@ -22,13 +23,15 @@ export const CreateStoryCreatorFitures = () => {
   };
 
   const stubStoryGenerator: StoryTextGenerator = {
-    generate: async () => {
-      return storyGenerated;
-    },
+    generate: async () => storyGenerated,
   };
 
   const stubStoryVoiceGenerator: StoryVoiceGenerator = {
-    generate: async () => `http://localhost:3000/audio/${idGenerated}`,
+    generate: async () => Buffer.from("audio"),
+  };
+
+  const stubFileAudioRepository: FileAudioRepository = {
+    save: async () => audioPath,
   };
 
   const createStoryCommand = new CreateStoryCommand(
@@ -36,6 +39,7 @@ export const CreateStoryCreatorFitures = () => {
     stubCatalogRepository,
     stubStoryGenerator,
     stubStoryVoiceGenerator,
+    stubFileAudioRepository,
   );
 
   return {
@@ -44,9 +48,13 @@ export const CreateStoryCreatorFitures = () => {
     },
     givenIdIsGenerated: (_id: string) => {
       idGenerated = _id;
+      audioPath = `http://localhost:3000/audio/${_id}`;
     },
     givenStoryTexthasBeenGenerated: (_story: TextStory) => {
       storyGenerated = _story;
+    },
+    givenAudioHasBeenStockedHere: (_audioPath: string) => {
+      audioPath = _audioPath;
     },
     whenCreateStory: async () => {
       await createStoryCommand.execute();

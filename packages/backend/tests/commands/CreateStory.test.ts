@@ -18,6 +18,7 @@ describe("Create Story use Case", () => {
 
     fixtures.givenTheCatalogOfStoriesIs([]);
     fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
+    fixtures.givenAudioHasBeenStockedHere("http://localhost:3000/audio/1");
 
     await fixtures.whenCreateStory();
 
@@ -41,6 +42,7 @@ describe("Create Story use Case", () => {
 
     fixtures.givenIdIsGenerated("2");
     fixtures.givenStoryTexthasBeenGenerated(mobyDickText);
+    fixtures.givenAudioHasBeenStockedHere("http://localhost:3000/audio/2");
 
     await fixtures.whenCreateStory();
 
@@ -88,6 +90,9 @@ describe("Create Story use Case", () => {
 
     fixtures.givenIdIsGenerated("550e8400-e29b-41d4-a716-446655440001");
     fixtures.givenStoryTexthasBeenGenerated(redRidingHoodText);
+    fixtures.givenAudioHasBeenStockedHere(
+      "http://localhost:3000/audio/550e8400-e29b-41d4-a716-446655440001",
+    );
 
     await fixtures.whenCreateStory();
 
