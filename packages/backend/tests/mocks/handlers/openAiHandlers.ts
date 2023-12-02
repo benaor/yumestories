@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 export const mockOpenAiStoryResponse = (content: unknown) =>
-  rest.post("https://api.openai.com/v1/chat/completions", (req, res, ctx) =>
+  rest.post(String(process.env.OPENAI_CHAT_COMPLETIONS_URL), (req, res, ctx) =>
     res(
       ctx.json({
         id: "chatcmpl-123",
@@ -26,6 +26,11 @@ export const mockOpenAiStoryResponse = (content: unknown) =>
         },
       }),
     ),
+  );
+
+export const mockOpenAiVoiceResponse = () =>
+  rest.post(String(process.env.OPENAI_TEXT_TO_SPEECH_URL), (req, res, ctx) =>
+    res(ctx.set("Content-Type", "audio/mpeg")),
   );
 
 export const openAiHandlers = [];
