@@ -123,5 +123,24 @@ describe("Feature: Create Story", () => {
 
       fixtures.ThenCatalogShouldBe([snowWhiteStory]);
     });
+
+    it("Catalog should contain 'Snow white' with these images", async () => {
+      const id = "550e8400-e29b-41d4-a716-446655440124";
+      const images = [`/t/${id}-1`, `/t/${id}-2`, `/t/${id}-3`, `/t/${id}-4`];
+      const snowWhiteText = StoryTextBuilder().build();
+      const snowWhiteStory = StoryBuilder()
+        .withId(id)
+        .withImages(images)
+        .build();
+
+      fixtures.givenIdIsGenerated(id);
+      fixtures.givenTheCatalogOfStoriesIs([]);
+      fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
+      fixtures.givenImagesHasStockedHere(`/t`);
+
+      await fixtures.whenCreateStory();
+
+      fixtures.ThenCatalogShouldBe([snowWhiteStory]);
+    });
   });
 });

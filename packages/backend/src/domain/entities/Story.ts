@@ -3,11 +3,13 @@ export class Story {
   text: string;
   title: string;
   audio: string;
+  images: Array<string>;
 
-  constructor({ id, text, title, audio }: Story) {
+  constructor({ id, text, title, audio, images }: Story) {
     this.id = id;
     this.text = text;
     this.title = title;
     this.audio = audio;
+    this.images = images;
   }
 }

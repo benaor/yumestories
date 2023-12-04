@@ -5,8 +5,9 @@ export const StoryBuilder = ({
   title = "Snow White",
   text = "Once upon a time ...",
   audio = "",
+  images = [],
 }: Partial<Story> = {}) => {
-  const props = { id, title, text, audio };
+  const props = { id, title, text, audio, images };
   return {
     withId(_id: typeof id) {
       return StoryBuilder({ ...props, id: _id });
@@ -20,11 +21,20 @@ export const StoryBuilder = ({
     withAudio(_audio: typeof audio) {
       return StoryBuilder({ ...props, audio: _audio });
     },
+    withImages(_images: typeof images) {
+      return StoryBuilder({ ...props, images: _images });
+    },
     build(): Story {
       if (!audio) {
         return StoryBuilder({
           ...props,
           audio: `http://localhost:3000/audio/${id}`,
+        }).build();
+      }
+      if (images.length === 0) {
+        return StoryBuilder({
+          ...props,
+          images: [`/${id}-1`, `/${id}-2`, `/${id}-3`, `/${id}-4`],
         }).build();
       }
       return props;

@@ -6,12 +6,16 @@ import { CreateStoryCommand } from "../../src/useCases/commands/CreateStory";
 import { StoryVoiceGenerator } from "../../src/domain/gateways/StoryVoiceGenerator";
 import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
 import { FileAudioRepository } from "../../src/domain/gateways/FileAudioRepository";
+import { FileImageRepository } from "../../src/domain/gateways/FileImageRepository";
+import { StoryImageGenerator } from "../../src/domain/gateways/StoryImageGenerator";
 
 export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
   let idGenerated: string = "550e8400-e29b-41d4-a716-446655440000";
   let storyGenerated: TextStory;
   let audioPath: string = `http://localhost:3000/audio/${idGenerated}`;
+  let imagesPath: string = ``;
+
   const stubIdGenerator: IdGenerator = {
     generate: () => idGenerated,
   };
@@ -30,8 +34,17 @@ export const CreateStoryCreatorFitures = () => {
     generate: async () => Buffer.from("audio"),
   };
 
+  const stubStoryImageGenerator: StoryImageGenerator = {
+    generate: async (_, count) =>
+      Array.from({ length: count }, () => Buffer.from("image")),
+  };
+
   const stubFileAudioRepository: FileAudioRepository = {
     save: async () => audioPath,
+  };
+
+  const stubFileImageRepository: FileImageRepository = {
+    save: async (_, filename) => `${imagesPath}/${filename}`,
   };
 
   const createStoryCommand = new CreateStoryCommand(
@@ -40,6 +53,8 @@ export const CreateStoryCreatorFitures = () => {
     stubStoryGenerator,
     stubStoryVoiceGenerator,
     stubFileAudioRepository,
+    stubFileImageRepository,
+    stubStoryImageGenerator,
   );
 
   return {
@@ -55,6 +70,9 @@ export const CreateStoryCreatorFitures = () => {
     },
     givenAudioHasBeenStockedHere: (_audioPath: string) => {
       audioPath = _audioPath;
+    },
+    givenImagesHasStockedHere: (_imagesPath: string) => {
+      imagesPath = _imagesPath;
     },
     whenCreateStory: async () => {
       await createStoryCommand.execute();
