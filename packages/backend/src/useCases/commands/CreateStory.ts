@@ -18,42 +18,26 @@ export interface CreateStoryUseCaseConfig {
 }
 
 export class CreateStoryUseCase {
-  private idGenerator: IdGenerator;
-  private catalogRepository: CatalogRepository;
-  private storyGenerator: StoryTextGenerator;
-  private voiceGenerator: StoryVoiceGenerator;
-  private fileAudioRepository: FileAudioRepository;
-  private fileImageRepository: FileImageRepository;
-  private imageGenerator: StoryImageGenerator;
-
-  constructor(config: CreateStoryUseCaseConfig) {
-    this.idGenerator = config.idGenerator;
-    this.catalogRepository = config.catalogRepository;
-    this.storyGenerator = config.storyGenerator;
-    this.voiceGenerator = config.voiceGenerator;
-    this.fileAudioRepository = config.fileAudioRepository;
-    this.fileImageRepository = config.fileImageRepository;
-    this.imageGenerator = config.imageGenerator;
-  }
+  constructor(private deps: CreateStoryUseCaseConfig) {}
 
   async execute(): Promise<void> {
-    const id = this.idGenerator.generate();
-    const { title, text } = await this.storyGenerator.generate();
+    const id = this.deps.idGenerator.generate();
+    const { title, text } = await this.deps.storyGenerator.generate();
 
-    const audioBuffer = await this.voiceGenerator.generate(text);
-    const audio = await this.fileAudioRepository.save(audioBuffer);
+    const audioBuffer = await this.deps.voiceGenerator.generate(text);
+    const audio = await this.deps.fileAudioRepository.save(audioBuffer);
 
-    const [b1, b2, b3, b4] = await this.imageGenerator.generate(text, 4);
+    const [b1, b2, b3, b4] = await this.deps.imageGenerator.generate(text, 4);
 
     const images = await Promise.all([
-      this.fileImageRepository.save(b1, `${id}-1`),
-      this.fileImageRepository.save(b2, `${id}-2`),
-      this.fileImageRepository.save(b3, `${id}-3`),
-      this.fileImageRepository.save(b4, `${id}-4`),
+      this.deps.fileImageRepository.save(b1, `${id}-1`),
+      this.deps.fileImageRepository.save(b2, `${id}-2`),
+      this.deps.fileImageRepository.save(b3, `${id}-3`),
+      this.deps.fileImageRepository.save(b4, `${id}-4`),
     ]);
 
     const story = new Story({ id, title, text, audio, images });
 
-    await this.catalogRepository.addStoryInCatalog(story);
+    await this.deps.catalogRepository.addStoryInCatalog(story);
   }
 }
