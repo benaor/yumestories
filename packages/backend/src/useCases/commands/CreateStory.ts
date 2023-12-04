@@ -7,16 +7,34 @@ import { StoryImageGenerator } from "../../domain/gateways/StoryImageGenerator";
 import { StoryTextGenerator } from "../../domain/gateways/StoryTextGenerator";
 import { StoryVoiceGenerator } from "../../domain/gateways/StoryVoiceGenerator";
 
-export class CreateStoryCommand {
-  constructor(
-    private idGenerator: IdGenerator,
-    private catalogRepo: CatalogRepository,
-    private storyGenerator: StoryTextGenerator,
-    private voiceGenerator: StoryVoiceGenerator,
-    private fileAudioRepository: FileAudioRepository,
-    private fileImageRepository: FileImageRepository,
-    private imageGenerator: StoryImageGenerator,
-  ) {}
+export interface CreateStoryUseCaseConfig {
+  idGenerator: IdGenerator;
+  catalogRepository: CatalogRepository;
+  storyGenerator: StoryTextGenerator;
+  voiceGenerator: StoryVoiceGenerator;
+  fileAudioRepository: FileAudioRepository;
+  fileImageRepository: FileImageRepository;
+  imageGenerator: StoryImageGenerator;
+}
+
+export class CreateStoryUseCase {
+  private idGenerator: IdGenerator;
+  private catalogRepository: CatalogRepository;
+  private storyGenerator: StoryTextGenerator;
+  private voiceGenerator: StoryVoiceGenerator;
+  private fileAudioRepository: FileAudioRepository;
+  private fileImageRepository: FileImageRepository;
+  private imageGenerator: StoryImageGenerator;
+
+  constructor(config: CreateStoryUseCaseConfig) {
+    this.idGenerator = config.idGenerator;
+    this.catalogRepository = config.catalogRepository;
+    this.storyGenerator = config.storyGenerator;
+    this.voiceGenerator = config.voiceGenerator;
+    this.fileAudioRepository = config.fileAudioRepository;
+    this.fileImageRepository = config.fileImageRepository;
+    this.imageGenerator = config.imageGenerator;
+  }
 
   async execute(): Promise<void> {
     const id = this.idGenerator.generate();
@@ -36,6 +54,6 @@ export class CreateStoryCommand {
 
     const story = new Story({ id, title, text, audio, images });
 
-    await this.catalogRepo.addStoryInCatalog(story);
+    await this.catalogRepository.addStoryInCatalog(story);
   }
 }

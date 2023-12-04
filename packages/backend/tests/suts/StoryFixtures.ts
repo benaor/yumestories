@@ -2,7 +2,7 @@ import { Story } from "../../src/domain/entities/Story";
 import { TextStory } from "../../src/domain/entities/TextStory";
 import { CatalogRepository } from "../../src/domain/gateways/CatalogRepository";
 import { StoryTextGenerator } from "../../src/domain/gateways/StoryTextGenerator";
-import { CreateStoryCommand } from "../../src/useCases/commands/CreateStory";
+import { CreateStoryUseCase } from "../../src/useCases/commands/CreateStory";
 import { StoryVoiceGenerator } from "../../src/domain/gateways/StoryVoiceGenerator";
 import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
 import { FileAudioRepository } from "../../src/domain/gateways/FileAudioRepository";
@@ -16,46 +16,48 @@ export const CreateStoryCreatorFitures = () => {
   let audioPath: string = ``;
   let imagesPath: string = ``;
 
-  const stubIdGenerator: IdGenerator = {
+  const idGenerator: IdGenerator = {
     generate: () => idGenerated,
   };
 
-  const stubCatalogRepository: CatalogRepository = {
+  const catalogRepository: CatalogRepository = {
     addStoryInCatalog: async (story: Story) => {
       catalog.push(story);
     },
   };
 
-  const stubStoryGenerator: StoryTextGenerator = {
+  const storyGenerator: StoryTextGenerator = {
     generate: async () => storyGenerated,
   };
 
-  const stubStoryVoiceGenerator: StoryVoiceGenerator = {
+  const voiceGenerator: StoryVoiceGenerator = {
     generate: async () => Buffer.from("audio"),
   };
 
-  const stubStoryImageGenerator: StoryImageGenerator = {
+  const imageGenerator: StoryImageGenerator = {
     generate: async (_, count) =>
       Array.from({ length: count }, () => Buffer.from("image")),
   };
 
-  const stubFileAudioRepository: FileAudioRepository = {
+  const fileAudioRepository: FileAudioRepository = {
     save: async () => `${audioPath}/${idGenerated}`,
   };
 
-  const stubFileImageRepository: FileImageRepository = {
+  const fileImageRepository: FileImageRepository = {
     save: async (_, filename) => `${imagesPath}/${filename}`,
   };
 
-  const createStoryCommand = new CreateStoryCommand(
-    stubIdGenerator,
-    stubCatalogRepository,
-    stubStoryGenerator,
-    stubStoryVoiceGenerator,
-    stubFileAudioRepository,
-    stubFileImageRepository,
-    stubStoryImageGenerator,
-  );
+  const createStoryUseCaseConfig = {
+    idGenerator,
+    catalogRepository,
+    storyGenerator,
+    voiceGenerator,
+    fileAudioRepository,
+    fileImageRepository,
+    imageGenerator,
+  };
+
+  const createStoryCommand = new CreateStoryUseCase(createStoryUseCaseConfig);
 
   return {
     givenTheCatalogOfStoriesIs: (_catalog: Array<Story>) => {
