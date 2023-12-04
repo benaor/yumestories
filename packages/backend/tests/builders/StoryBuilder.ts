@@ -28,7 +28,7 @@ export const StoryBuilder = ({
       if (!audio) {
         return StoryBuilder({
           ...props,
-          audio: `http://localhost:3000/audio/${id}`,
+          audio: `/${id}`,
         }).build();
       }
       if (images.length === 0) {

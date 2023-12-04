@@ -113,11 +113,15 @@ describe("Feature: Create Story", () => {
     it("Catalog should contain 'Snow white' with this audio", async () => {
       const uuid = "550e8400-e29b-41d4-a716-446655440123";
       const snowWhiteText = StoryTextBuilder().build();
-      const snowWhiteStory = StoryBuilder().withAudio(`test/${uuid}`).build();
+      const snowWhiteStory = StoryBuilder()
+        .withId(uuid)
+        .withAudio(`/test/${uuid}`)
+        .build();
 
+      fixtures.givenIdIsGenerated(uuid);
       fixtures.givenTheCatalogOfStoriesIs([]);
       fixtures.givenStoryTexthasBeenGenerated(snowWhiteText);
-      fixtures.givenAudioHasBeenStockedHere(`test/${uuid}`);
+      fixtures.givenAudioHasStockedHere(`/test`);
 
       await fixtures.whenCreateStory();
 

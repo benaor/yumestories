@@ -13,7 +13,7 @@ export const CreateStoryCreatorFitures = () => {
   let catalog: Array<Story>;
   let idGenerated: string = "550e8400-e29b-41d4-a716-446655440000";
   let storyGenerated: TextStory;
-  let audioPath: string = `http://localhost:3000/audio/${idGenerated}`;
+  let audioPath: string = ``;
   let imagesPath: string = ``;
 
   const stubIdGenerator: IdGenerator = {
@@ -40,7 +40,7 @@ export const CreateStoryCreatorFitures = () => {
   };
 
   const stubFileAudioRepository: FileAudioRepository = {
-    save: async () => audioPath,
+    save: async () => `${audioPath}/${idGenerated}`,
   };
 
   const stubFileImageRepository: FileImageRepository = {
@@ -63,12 +63,11 @@ export const CreateStoryCreatorFitures = () => {
     },
     givenIdIsGenerated: (_id: string) => {
       idGenerated = _id;
-      audioPath = `http://localhost:3000/audio/${_id}`;
     },
     givenStoryTexthasBeenGenerated: (_story: TextStory) => {
       storyGenerated = _story;
     },
-    givenAudioHasBeenStockedHere: (_audioPath: string) => {
+    givenAudioHasStockedHere: (_audioPath: string) => {
       audioPath = _audioPath;
     },
     givenImagesHasStockedHere: (_imagesPath: string) => {
