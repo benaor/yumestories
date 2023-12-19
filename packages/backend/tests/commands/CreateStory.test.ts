@@ -13,6 +13,15 @@ describe("Feature: Create Story", () => {
   });
 
   describe("Scenario: Create stories and add them in catalog", () => {
+    it("Catalog should contain a story with below ID", async () => {
+      const id = "550e8400-e29b-41d4-a714-446655440123";
+
+      fixtures.givenIdIsGenerated(id);
+      const storyId = await fixtures.whenCreateStory();
+
+      expect(storyId).toBe(id);
+    });
+
     it("Catalog should contain 'Hansel et Gretel'", async () => {
       const hanselAndGretelText = StoryTextBuilder()
         .withTitle("Hansel et Gretel")

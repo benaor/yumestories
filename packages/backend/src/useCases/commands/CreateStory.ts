@@ -20,7 +20,7 @@ export interface CreateStoryUseCaseConfig {
 export class CreateStoryUseCase {
   constructor(private deps: CreateStoryUseCaseConfig) {}
 
-  async execute(): Promise<void> {
+  async execute(): Promise<string> {
     const id = this.deps.idGenerator.generate();
     const { title, text } = await this.deps.storyGenerator.generate();
 
@@ -39,5 +39,7 @@ export class CreateStoryUseCase {
     const story = new Story({ id, title, text, audio, images });
 
     await this.deps.catalogRepository.addStoryInCatalog(story);
+
+    return id;
   }
 }

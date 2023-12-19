@@ -8,11 +8,12 @@ import { IdGenerator } from "../../src/domain/gateways/IdGenerator";
 import { FileAudioRepository } from "../../src/domain/gateways/FileAudioRepository";
 import { FileImageRepository } from "../../src/domain/gateways/FileImageRepository";
 import { StoryImageGenerator } from "../../src/domain/gateways/StoryImageGenerator";
+import { StoryBuilder } from "../builders/StoryBuilder";
 
 export const CreateStoryCreatorFitures = () => {
-  let catalog: Array<Story>;
+  let catalog: Array<Story> = [];
   let idGenerated: string = "550e8400-e29b-41d4-a716-446655440000";
-  let storyGenerated: TextStory;
+  let storyGenerated: TextStory = StoryBuilder().build();
   let audioPath: string = ``;
   let imagesPath: string = ``;
 
@@ -76,7 +77,7 @@ export const CreateStoryCreatorFitures = () => {
       imagesPath = _imagesPath;
     },
     whenCreateStory: async () => {
-      await createStoryCommand.execute();
+      return await createStoryCommand.execute();
     },
     ThenCatalogShouldBe: (expectedCatalog: Array<Story>) => {
       expect(catalog).toEqual(expectedCatalog);
