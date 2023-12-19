@@ -3,7 +3,7 @@ import { FileSystemAudioRepository } from "../../src/adapters/FileSystemAudioRep
 
 const dir = __dirname + "/inMemory";
 
-describe("FileSystemCatalogRepository", () => {
+describe("FileSystemAudioRepository", () => {
   beforeAll(() => {
     mkdirSync(dir);
   });
