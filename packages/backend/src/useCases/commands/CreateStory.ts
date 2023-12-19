@@ -25,7 +25,7 @@ export class CreateStoryUseCase {
     const { title, text } = await this.deps.storyGenerator.generate();
 
     const audioBuffer = await this.deps.voiceGenerator.generate(text);
-    const audio = await this.deps.fileAudioRepository.save(audioBuffer);
+    const audio = await this.deps.fileAudioRepository.save(audioBuffer, id);
 
     const [b1, b2, b3, b4] = await this.deps.imageGenerator.generate(text, 4);
 

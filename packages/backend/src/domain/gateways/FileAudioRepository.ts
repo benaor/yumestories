@@ -1,3 +1,3 @@
 export interface FileAudioRepository {
-  save(file: Buffer): Promise<string>;
+  save(file: Buffer, filename?: string): Promise<string>;
 }
