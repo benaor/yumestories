@@ -1,4 +1,5 @@
 import { StoryVoiceGenerator } from "../domain/gateways/StoryVoiceGenerator";
+import fetch from "node-fetch";
 import "dotenv/config";
 
 export class OpenAiVoiceGenerator implements StoryVoiceGenerator {

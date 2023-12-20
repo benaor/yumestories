@@ -1,6 +1,7 @@
 import { FileSystemAudioRepository } from "./adapters/FileSystemAudioRepository";
 import { FileSystemCatalogRepository } from "./adapters/FileSystemCatalogRepository";
 import { FileSystemImageRepository } from "./adapters/FileSystemImageRepository";
+import { OpenAiImageGenerator } from "./adapters/OpenAiImageGenerator";
 import { OpenAiTextGenerator } from "./adapters/OpenAiTextGenerator";
 import { OpenAiVoiceGenerator } from "./adapters/OpenAiVoiceGenerator";
 import { UniqidIdGenerator } from "./adapters/UniqidIdGenerator";
@@ -9,9 +10,10 @@ import {
   CreateStoryUseCaseConfig,
 } from "./useCases/commands/CreateStory";
 
-const fsCatalogFilename = __dirname + "/../inMemory/catalog.json";
-const fsAudioPath = __dirname + "/../inMemory/audio";
-const fsImagePath = __dirname + "/../inMemory/image";
+const rootDir = "./inMemory";
+const fsCatalogFilename = rootDir + "/catalog.json";
+const fsAudioPath = rootDir + "/audio";
+const fsImagePath = rootDir + "/image";
 
 const idGenerator = new UniqidIdGenerator();
 const catalogRepository = new FileSystemCatalogRepository(fsCatalogFilename);

@@ -1,7 +1,7 @@
 import { TextStory } from "../domain/entities/TextStory";
 import { StoryTextGenerator } from "../domain/gateways/StoryTextGenerator";
-import "dotenv/config";
 import fetch from "node-fetch";
+import "dotenv/config";
 
 export class OpenAiTextGenerator implements StoryTextGenerator {
   private readonly apiUrl = String(process.env.OPENAI_CHAT_COMPLETIONS_URL);
@@ -24,7 +24,7 @@ export class OpenAiTextGenerator implements StoryTextGenerator {
     const res = await fetch(this.apiUrl, { method, headers, body });
     const story = await res.json();
 
-    return story.choices[0].message.content;
+    return JSON.parse(story.choices[0].message.content);
   }
 
   private createHeader() {
